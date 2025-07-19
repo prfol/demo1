@@ -9,7 +9,7 @@
         <link rel="image_src" href="Dalia_Li_files/DaliaLi-Min.png">
         <link rel="canonical" href="https://prfol.github.io/demo1/">
         <link rel="shortcut icon" type="image/x-icon" href="Dalia_Li_files/favicon.ico">
-        <link rel="manifest" href="Dalia_Li_files/manifest.json">
+        <link rel="manifest" href="manifest.json">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-title" content="Dalia Li">
@@ -582,7 +582,7 @@
                                 en el momento que lo requieras.
                             </p>
                             <div class="d-grid gap-2">
-                                <button id="install-btn" class="btn btn-outline-secondary btn-sm" type="button"><b>Instalar</b></button>
+                                <button id="installButton" class="btn btn-outline-secondary btn-sm" type="button"><b>Instalar</b></button>
                             </div>
                         </div>
                     </div>
@@ -701,26 +701,10 @@
             </div>
         </div>
         <!-- /Modal -->
-        <!--
-            <script>
-              if ('serviceWorker' in navigator) {
-            	window.addEventListener('load', () => {
-            	  navigator.serviceWorker.register('/wp-content/uploads/sites/16/service-worker.js')
-            		.then(registration  
-             => {
-            		  console.log('Service Worker registrado:', registration);
-            		})
-            		.catch(error => {
-            		  console.error('Error al registrar el Service Worker:', error);  
-            
-            		});
-            	});
-              }
-            </script>
-            -->
+
         <script>
             function esFirefox() {
-            	return typeof InstallTrigger !== 'undefined'; // Esta propiedad es única de Firefox
+            	return typeof InstallTrigger !== 'undefined';
             }
             
             function isPWAallowed() {
@@ -745,11 +729,25 @@
             		  window.deferredPrompt = null;
             		});
             	  });
+				  				  
+				// Registro del Service Worker
+				if ('serviceWorker' in navigator) {
+					window.addEventListener('load', () => {
+						navigator.serviceWorker.register('https://prfol.github.io/demo1/service-worker.js')
+							.then(registration => {
+								console.log('Service Worker registrado con éxito:', registration);
+							})
+							.catch(error => {
+								console.error('Fallo el registro del Service Worker:', error);
+							});
+					});
+				}				  
             }
             else {
             	  document.getElementById('enlace-instalar').style.display = 'none';			  
             }
         </script>
+		
         <div id="addtoany" style="position: static;">
             <div class="a2a_overlay" id="a2a_overlay"></div>
             <div id="a2a_modal" class="a2a_modal a2a_hide" role="dialog" tabindex="-1" aria-label="">
